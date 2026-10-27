@@ -1,0 +1,414 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>No Dirty Business</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: teal masthead band with a signed job-sheet beside the promise, then plain sections on a cool white ground; one lime accent for actions. */
+:root{
+  --bg:#f5f8f7; --surface:#ffffff; --ink:#10282a; --muted:#4f6668; --line:#d5e2e0;
+  --teal:#0b5c5f; --teal-ink:#ffffff; --teal-soft:#e2efee; --lime:#c6e84a; --lime-ink:#14300d;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1718; --surface:#132324; --ink:#e4efee; --muted:#9db3b2; --line:#24393a;
+  --teal:#0f4446; --teal-ink:#eaf5f4; --teal-soft:#16302f; --lime:#c6e84a; --lime-ink:#14300d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1718; --surface:#132324; --ink:#e4efee; --muted:#9db3b2; --line:#24393a;
+  --teal:#0f4446; --teal-ink:#eaf5f4; --teal-soft:#16302f; --lime:#c6e84a; --lime-ink:#14300d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{padding-block:72px}
+.lead{color:var(--muted);max-width:60ch}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font:600 1rem var(--body);cursor:pointer;text-decoration:none}
+.btn-lime{background:var(--lime);color:var(--lime-ink)}
+.btn-ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+/* masthead */
+.mast{background:var(--teal);color:var(--teal-ink)}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px;flex-wrap:wrap}
+.logo{font:800 1.3rem var(--display);letter-spacing:-.01em;display:flex;align-items:center;gap:2px}
+.logo s{text-decoration:none;position:relative}
+.logo s::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:4px;border-radius:4px;background:var(--lime);transform:rotate(-6deg)}
+.nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap;font-weight:500}
+.nav a{text-decoration:none;opacity:.9}
+.nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.hero{display:grid;grid-template-columns:1.2fr .9fr;gap:48px;align-items:center;padding-block:40px 72px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.9rem);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero .lead{color:inherit;opacity:.85;margin-top:20px;font-size:1.12rem}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.cities{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;font:500 .8rem var(--mono)}
+.cities span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12)}
+.sheet{background:var(--surface);color:var(--ink);border-radius:6px;padding:22px 22px 18px;box-shadow:0 18px 40px rgba(0,0,0,.25);transform:rotate(1.5deg);min-width:0}
+.sheet header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px dashed var(--line);padding-bottom:10px;margin-bottom:10px;gap:10px}
+.sheet header b{font:700 1rem var(--display)}
+.sheet header span{font:500 .72rem var(--mono);color:var(--muted)}
+.sheet ul{list-style:none;padding:0;margin:0;display:grid;gap:7px;font-size:.95rem}
+.sheet li{display:flex;gap:10px;align-items:baseline}
+.tick{flex:none;width:18px;height:18px;border-radius:4px;background:var(--teal);color:var(--teal-ink);font-size:.75rem;display:grid;place-items:center;transform:translateY(3px)}
+.sign{display:flex;justify-content:space-between;margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font:500 .75rem var(--mono);color:var(--muted);gap:10px;flex-wrap:wrap}
+.sign i{font-family:var(--display);font-size:1.05rem;color:var(--teal);font-style:normal}
+:root[data-theme="dark"] .sign i{color:var(--lime)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sign i{color:var(--lime)}}
+
+/* services + prices */
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.head > div{display:grid;gap:10px}
+.toggle{display:inline-flex;background:var(--teal-soft);border-radius:999px;padding:4px}
+.toggle button{border:0;background:transparent;color:var(--ink);font:600 .95rem var(--body);padding:9px 18px;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink)}
+.price-table{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+td.p{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.92rem}
+td small{display:block;color:var(--muted)}
+.note{margin-top:14px;font-size:.9rem;color:var(--muted)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:12px;align-content:start}
+.plan.feature{background:var(--teal);color:var(--teal-ink);border-color:transparent}
+.plan .amt{font:800 2rem var(--display);font-variant-numeric:tabular-nums}
+.plan .amt small{font:500 .85rem var(--body);opacity:.75}
+.plan ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.95rem}
+.tag{justify-self:start;font:500 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:var(--lime-ink);padding:4px 9px;border-radius:999px}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start;border-top:3px solid var(--teal);padding-top:14px}
+.steps li::before{content:"Step " counter(s);font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.steps p{color:var(--muted);font-size:.95rem}
+
+/* trust */
+.trust{background:var(--teal-soft)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:28px}
+.trust-grid div{display:grid;gap:6px}
+.trust-grid p{color:var(--muted);font-size:.95rem}
+
+/* booking */
+.book{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+form{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:14px;min-width:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font-weight:600;font-size:.9rem}
+input,select,textarea{font:400 1rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;width:100%}
+textarea{resize:vertical;min-height:70px}
+.estimate{display:flex;justify-content:space-between;align-items:baseline;padding:14px 16px;background:var(--teal-soft);border-radius:8px;gap:12px;flex-wrap:wrap}
+.estimate b{font:800 1.6rem var(--display);font-variant-numeric:tabular-nums}
+.estimate span{font-size:.85rem;color:var(--muted)}
+.out{background:var(--surface);border:1px dashed var(--teal);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
+.out pre{margin:0;white-space:pre-wrap;word-break:break-word;font:500 .85rem/1.55 var(--mono);color:var(--ink)}
+.status{font-size:.9rem;color:var(--muted)}
+.contact{display:grid;gap:6px;margin-top:20px}
+.contact code{font:500 1rem var(--mono);user-select:all}
+
+footer{background:var(--teal);color:var(--teal-ink);padding-block:36px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.9rem}
+footer .wrap > div{display:grid;gap:4px}
+
+@media (max-width:900px){
+  .hero,.book{grid-template-columns:1fr}
+  .sheet{transform:none}
+  .plans{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){
+  .steps,.trust-grid,.row{grid-template-columns:1fr}
+  .nav ul{gap:14px;font-size:.9rem}
+  section{padding-block:52px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sheet{transition:transform .4s ease}
+  .sheet:hover{transform:rotate(0deg)}
+}
+</style>
+
+<div class="mast">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <div class="logo">No&nbsp;<s>Dirty</s>&nbsp;Business</div>
+      <ul>
+        <li><a href="#prices">Prices</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#book">Book</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <div>
+        <p class="eyebrow" style="color:inherit;opacity:.75">Professional cleaning · Akure</p>
+        <h1 style="margin-top:14px">Clean spaces.<br><em>Clean dealings.</em></h1>
+        <p class="lead">Deep cleaning, fumigation, upholstery and office cleaning by vetted, uniformed teams. Fixed prices you can see before you book, and a signed checklist on every job.</p>
+        <div class="hero-cta">
+          <a class="btn btn-lime" href="#book">Get your price</a>
+          <a class="btn btn-ghost" href="#prices">See the price list</a>
+        </div>
+        <div class="cities"><span>Akure · now booking</span><span>Lagos · from April 2028</span><span>10% off your first clean</span></div>
+      </div>
+      <aside class="sheet" aria-label="Example job sheet">
+        <header><b>Job sheet · 3-bed deep clean</b><span>Alagbaka, Akure</span></header>
+        <ul>
+          <li><span class="tick" aria-hidden="true">✓</span>Kitchen degreased: hob, extractor, tiles, cabinets</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Bathrooms descaled, toilets disinfected</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Bedrooms dusted top to bottom, under beds</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Windows, burglary-proof bars and nets wiped</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Floors scrubbed and mopped, terrazzo polished</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Before-and-after photos sent on WhatsApp</li>
+        </ul>
+        <div class="sign"><span>Team lead <i>T. Adeyemi</i></span><span>Customer sign-off <i>✓ Approved</i></span></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<section id="prices">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Price list</p>
+        <h2>Know the price before we knock</h2>
+        <p class="lead">Prices are by property size and include all chemicals and equipment. Extras such as inside the oven or fridge are quoted separately.</p>
+      </div>
+      <div class="toggle" role="group" aria-label="Choose city">
+        <button type="button" id="city-akure" data-city="akure" aria-pressed="true">Akure</button>
+        <button type="button" id="city-lagos" data-city="lagos" aria-pressed="false">Lagos</button>
+      </div>
+    </div>
+    <div class="price-table">
+      <table>
+        <thead><tr><th>Service</th><th>Size</th><th>Price</th></tr></thead>
+        <tbody id="price-body"></tbody>
+      </table>
+    </div>
+    <p class="note" id="price-note">Akure prices. A 50% deposit confirms your booking; the balance is paid after you sign off the job sheet.</p>
+  </div>
+</section>
+
+<section id="plans" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div>
+      <p class="eyebrow">Monthly plans</p>
+      <h2>Stay clean without booking every time</h2>
+    </div></div>
+    <div class="plans">
+      <article class="plan feature">
+        <span class="tag">Most popular</span>
+        <h3>Home plan</h3>
+        <p class="amt" data-plan="home">₦50,000 <small>/ month, 3-bed flat</small></p>
+        <ul><li>2 standard cleans a month</li><li>Free deep-clean upgrade every quarter</li><li>Same team each visit</li><li>Pause or cancel with one month's notice</li></ul>
+      </article>
+      <article class="plan">
+        <h3>Office contract</h3>
+        <p class="amt" data-plan="office">from ₦150,000 <small>/ month</small></p>
+        <ul><li>Cleaning 3 times a week, before or after hours</li><li>Washroom supplies checked every visit</li><li>Monthly invoice for your accounts team</li><li>Free first-week trial clean</li></ul>
+      </article>
+      <article class="plan">
+        <h3>Staff retainership</h3>
+        <p class="amt" data-plan="retainer">₦120,000 <small>/ month</small></p>
+        <ul><li>A trained, vetted cleaner on your premises full-time</li><li>We handle pay, uniform and supplies</li><li>Replacement cover for sick days and leave</li><li>Suits hotels, schools, clinics and estates</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><p class="eyebrow">How it works</p><h2>Five steps, every job</h2></div></div>
+    <ol class="steps">
+      <li><h3>Book</h3><p>Choose your service and size below, or send us a WhatsApp message.</p></li>
+      <li><h3>Confirm</h3><p>Pay a 50% deposit. We send the team's names and photos the evening before.</p></li>
+      <li><h3>Clean</h3><p>A two-person team works room by room from the job sheet.</p></li>
+      <li><h3>Sign off</h3><p>Walk the space with the team lead and sign the sheet, then pay the balance.</p></li>
+      <li><h3>Follow up</h3><p>Missed anything on the sheet? We come back within 48 hours, free.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <p class="eyebrow">Why people let us in</p>
+    <h2 style="margin-top:10px">We don't do dirty business</h2>
+    <div class="trust-grid">
+      <div><h3>Vetted cleaners</h3><p>Two guarantors, a police check, NIN verification and two paid trial cleans before anyone joins.</p></div>
+      <div><h3>Insured work</h3><p>Public liability insurance covers accidental damage in your home or office.</p></div>
+      <div><h3>Fixed prices</h3><p>The price on this page is the price you pay. No surprise charges on the day.</p></div>
+      <div><h3>Safe products</h3><p>Labelled chemicals, with gentle options for homes with babies or pets.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap book">
+    <div>
+      <p class="eyebrow">Book a clean</p>
+      <h2 style="margin-top:10px">Get your price in a minute</h2>
+      <p class="lead" style="margin-top:14px">Pick your service and size to see your price with the 10% first-booking discount. We'll prepare a booking message you can send us on WhatsApp.</p>
+      <div class="contact">
+        <span class="eyebrow">WhatsApp and calls</span>
+        <code id="phone">+234 800 000 0000</code>
+        <span class="status">Office: Alagbaka, Akure, Ondo State · Mon to Sat, 7am to 7pm</span>
+      </div>
+    </div>
+    <div style="display:grid;gap:18px;min-width:0">
+      <form id="quote" novalidate>
+        <div class="row">
+          <label for="f-city">City
+            <select id="f-city"><option value="akure">Akure</option><option value="lagos">Lagos (from Apr 2028)</option></select>
+          </label>
+          <label for="f-service">Service
+            <select id="f-service"></select>
+          </label>
+        </div>
+        <div class="row">
+          <label for="f-size">Size
+            <select id="f-size"></select>
+          </label>
+          <label for="f-date">Preferred date
+            <input id="f-date" type="date">
+          </label>
+        </div>
+        <div class="row">
+          <label for="f-name">Your name<input id="f-name" type="text" autocomplete="name" placeholder="e.g. Funmi Olawale"></label>
+          <label for="f-area">Area<input id="f-area" type="text" placeholder="e.g. Ijapo Estate"></label>
+        </div>
+        <label for="f-notes">Anything we should know?<textarea id="f-notes" placeholder="Pets, parking, extras like inside the oven…"></textarea></label>
+        <label style="display:flex;gap:10px;align-items:center;font-weight:500"><input id="f-first" type="checkbox" checked style="width:auto">This is my first booking (10% off)</label>
+        <div class="estimate"><span>Your price</span><b id="est">₦0</b><span id="est-note"></span></div>
+        <button class="btn btn-lime" type="submit">Prepare my booking message</button>
+      </form>
+      <div class="out" id="out" hidden>
+        <p class="eyebrow">Your booking message</p>
+        <pre id="msg"></pre>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-lime" type="button" id="copy">Copy message</button>
+          <span class="status" id="copy-status">Paste it into WhatsApp to <span id="phone2"></span>.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><div class="logo">No&nbsp;<s>Dirty</s>&nbsp;Business</div><span>Clean spaces. Clean dealings.</span></div>
+    <div><span>Akure: Alagbaka, Ondo State</span><span>Lagos: opening April 2028</span></div>
+    <div><span>Deep cleaning · Fumigation · Upholstery</span><span>Office contracts · Staff retainership</span></div>
+  </div>
+</footer>
+
+<script>
+const PHONE = "+234 800 000 0000";
+const naira = n => "₦" + Math.round(n).toLocaleString("en-NG");
+// [service, size label, akure, lagos] ; ranges stored as [low, high]
+const PRICES = [
+  ["Standard clean","1-bedroom flat",15000,25000],
+  ["Standard clean","2-bedroom flat",22000,35000],
+  ["Standard clean","3-bedroom flat",30000,45000],
+  ["Deep clean","2-bedroom flat",35000,55000],
+  ["Deep clean","3-bedroom flat",45000,75000],
+  ["Deep clean","Duplex, 4–5 bedrooms",[75000,110000],[120000,180000]],
+  ["Post-construction / move-in-out","3-bedroom flat",60000,95000],
+  ["Post-construction / move-in-out","Duplex",120000,200000],
+  ["Fumigation","1-bedroom flat",15000,25000],
+  ["Fumigation","2-bedroom flat",22000,35000],
+  ["Fumigation","3-bedroom flat",30000,45000],
+  ["Upholstery cleaning","3-seater sofa (per seat)",12000,18000],
+  ["Upholstery cleaning","Full set, 7 seats",28000,42000],
+  ["Pressure washing","Compound or driveway",30000,50000]
+];
+const fmt = v => Array.isArray(v) ? naira(v[0]) + "–" + naira(v[1]) : naira(v);
+const PLANS = {akure:{home:"₦50,000",office:"from ₦150,000",retainer:"₦120,000"},lagos:{home:"₦80,000",office:"from ₦250,000",retainer:"₦170,000"}};
+
+function renderTable(city){
+  const i = city === "akure" ? 2 : 3;
+  let last = "";
+  document.getElementById("price-body").innerHTML = PRICES.map(r => {
+    const name = r[0] === last ? "" : r[0]; last = r[0];
+    const v = Array.isArray(r[i]) ? fmt(r[i]) : (r[1].includes("per seat") ? naira(r[i]/3) + " per seat" : fmt(r[i]));
+    return `<tr><td>${name ? "<b>"+name+"</b>" : ""}</td><td>${r[1]}</td><td class="p">${v}</td></tr>`;
+  }).join("");
+  document.getElementById("price-note").textContent = city === "akure"
+    ? "Akure prices. A 50% deposit confirms your booking; the balance is paid after you sign off the job sheet."
+    : "Lagos prices from April 2028, covering the Mainland, with Lekki and Victoria Island jobs quoted for travel time.";
+  document.querySelectorAll("[data-plan]").forEach(el => {
+    const small = el.querySelector("small").outerHTML;
+    el.innerHTML = PLANS[city][el.dataset.plan] + " " + small;
+  });
+  document.querySelectorAll(".toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.city === city)));
+}
+document.querySelectorAll(".toggle button").forEach(b => b.addEventListener("click", () => {
+  renderTable(b.dataset.city);
+  document.getElementById("f-city").value = b.dataset.city; updateEstimate();
+}));
+
+const fService = document.getElementById("f-service"), fSize = document.getElementById("f-size");
+const services = [...new Set(PRICES.map(r => r[0]))];
+fService.innerHTML = services.map(s => `<option>${s}</option>`).join("");
+fService.value = "Deep clean";
+function fillSizes(){
+  const keep = fSize.value;
+  fSize.innerHTML = PRICES.filter(r => r[0] === fService.value).map(r => `<option>${r[1]}</option>`).join("");
+  if ([...fSize.options].some(o => o.value === keep)) fSize.value = keep;
+  else if (fService.value === "Deep clean") fSize.value = "3-bedroom flat";
+}
+function current(){
+  const city = document.getElementById("f-city").value;
+  const row = PRICES.find(r => r[0] === fService.value && r[1] === fSize.value);
+  const v = row[city === "akure" ? 2 : 3];
+  const first = document.getElementById("f-first").checked;
+  const k = first ? 0.9 : 1;
+  return {city, row, text: Array.isArray(v) ? naira(v[0]*k) + "–" + naira(v[1]*k) : naira(v*k), first};
+}
+function updateEstimate(){
+  const c = current();
+  document.getElementById("est").textContent = c.text;
+  document.getElementById("est-note").textContent = c.first ? "includes 10% off" : "standard price";
+}
+fService.addEventListener("change", () => { fillSizes(); updateEstimate(); });
+["f-size","f-city","f-first"].forEach(id => document.getElementById(id).addEventListener("change", updateEstimate));
+
+document.getElementById("quote").addEventListener("submit", e => {
+  e.preventDefault();
+  const c = current(), v = id => document.getElementById(id).value.trim();
+  const d = v("f-date") ? new Date(v("f-date") + "T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"}) : "flexible";
+  const lines = [
+    "Hello No Dirty Business, I'd like to book a clean.",
+    "",
+    "Name: " + (v("f-name") || "—"),
+    "City: " + (c.city === "akure" ? "Akure" : "Lagos"),
+    "Area: " + (v("f-area") || "—"),
+    "Service: " + c.row[0] + ", " + c.row[1],
+    "Preferred date: " + d,
+    "Quoted price: " + c.text + (c.first ? " (first-booking 10% off)" : ""),
+  ];
+  if (v("f-notes")) lines.push("Notes: " + v("f-notes"));
+  document.getElementById("msg").textContent = lines.join("\n");
+  document.getElementById("out").hidden = false;
+  document.getElementById("copy-status").innerHTML = 'Paste it into WhatsApp to <span>' + PHONE + '</span>.';
+});
+document.getElementById("copy").addEventListener("click", () => {
+  const pre = document.getElementById("msg"), st = document.getElementById("copy-status");
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); st.textContent = "Message selected. Copy it, then paste it into WhatsApp to " + PHONE + "."; };
+  try {
+    navigator.clipboard.writeText(pre.textContent).then(() => { st.textContent = "Copied. Paste it into WhatsApp to " + PHONE + "."; }, fallback);
+  } catch (err) { fallback(); }
+});
+
+document.getElementById("phone").textContent = PHONE;
+renderTable("akure"); fillSizes(); updateEstimate();
+</script>
+
+</body></html>
